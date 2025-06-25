@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Maroon Black';
+    src: url('@/assets/fonts/maroonblack.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SFR-bold';
+    src: url('@/assets/fonts/sfrbold.OTF') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SFR-medium';
+    src: url('@/assets/fonts/sfrmedium.OTF') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SFR-regular';
+    src: url('@/assets/fonts/sfrregular.OTF') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}

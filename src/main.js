@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import './global.css'
+import './fonts.css' 
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.mount('#app')
