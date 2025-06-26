@@ -8,6 +8,30 @@
       <img src="@/assets/images/user.svg" alt="" />
       <img src="@/assets/images/bag.svg" alt="" />
     </div>
+    <div class="desktop-div">
+      <div class="desktop-column-1">
+        <p class="logo">perco</p>
+      </div>
+      <div class="column-wrapper">
+        <div class="desktop-column-2">
+          <a href="#">Bedroom</a>
+          <a href="#">Living room</a>
+          <a href="#">Kitchen</a>
+        </div>
+        <div class="desktop-column-3">
+          <a href="#">Dining room</a>
+          <a href="#">Garden</a>
+          <a href="#">Bathroom</a>
+        </div>
+      </div>
+      <div class="user-info">
+        <a href="#" class="account">Account</a>
+        <div class="bag-wraper">
+          <img src="@/assets/images/bag.svg" alt="" />
+          <a href="#">Bag</a>
+        </div>
+      </div>
+    </div>
   </nav>
 </template>
 
@@ -18,6 +42,13 @@ nav {
   padding: 16px 20px;
 }
 
+.desktop-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .logo {
   font-family: "Maroon Black";
   font-size: 3.6rem;
@@ -25,8 +56,50 @@ nav {
 }
 
 .mobile-div {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 15px;
+}
+
+a {
+  color: #302a18;
+  font-size: 1.6rem;
+  font-family: "SFR-regular";
+  text-transform: uppercase;
+}
+
+.desktop-column-2,
+.desktop-column-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.column-wrapper {
+  display: flex;
+  gap: 60px;
+}
+
+.account {
+  margin-right: 52px;
+}
+
+.user-info,
+.bag-wraper {
+  display: flex;
+  align-items: center;
+}
+
+.bag-wraper {
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .desktop-div {
+    display: none;
+  }
+  .mobile-div {
+    display: flex;
+  }
 }
 </style>

@@ -6,11 +6,15 @@
         <input type="text" placeholder="Search" />
       </div>
     </div>
-    <h1>Synthesis of Luxury</h1>
-    <p class="pre-heading">Your corner of style</p>
-    <p class="article">
-      Discover a world of furniture where luxury meets modern design.
-    </p>
+    <div class="text-wrapper">
+      <h1>Synthesis of Luxury</h1>
+      <div class="article-wrapper">
+        <p class="pre-heading">Your corner of style</p>
+        <p class="article">
+          Discover a world of furniture where luxury meets modern design.
+        </p>
+      </div>
+    </div>
     <div class="wrapper">
       <img src="@/assets/images/hero-photo.jpg" class="hero-image" alt="" />
       <div class="button-circle">
@@ -44,6 +48,7 @@
   background-repeat: no-repeat;
   background-position: center;
   z-index: 0;
+  pointer-events: none;
 }
 
 .centered {
@@ -85,7 +90,7 @@ input::placeholder {
 h1 {
   color: #302a18;
   font-family: "Maroon Black";
-  font-size: 7.3rem;
+  font-size: clamp(6.5rem, 10vw, 17rem);
   font-weight: 400;
   margin-bottom: 26px;
 }
@@ -93,14 +98,14 @@ h1 {
 .pre-heading {
   color: #302a18;
   font-family: "SFR-medium";
-  font-size: 1.6rem;
+  font-size: clamp(1.6rem, 10vw, 2.2rem);
   margin-bottom: 10px;
 }
 
 .article {
   color: #302a18;
   font-family: "SFR-regular";
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 10vw, 1.6rem);
   max-width: 21rem;
   margin-bottom: 65px;
 }
@@ -114,7 +119,7 @@ h1 {
 }
 
 .wrapper {
-    position: relative;
+  position: relative;
 }
 
 .button-circle {
@@ -141,5 +146,18 @@ h1 {
 
 .button-circle img {
   margin-left: 45px;
+}
+
+@media (min-width: 768px) {
+  .text-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    width: 120rem
+  }
 }
 </style>
