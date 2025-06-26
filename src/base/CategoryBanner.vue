@@ -10,6 +10,7 @@ import { defineProps } from "vue";
 defineProps({
   category: String,
 });
+
 </script>
 
 <style scoped>
@@ -26,11 +27,13 @@ defineProps({
   display: flex;
   align-items: flex-end;
 }
+
 .banner-heading {
   color: #fff;
   font-size: clamp(4.5rem, 8vw, 12.2rem);
   font-family: 'Maroon Black';
 }
+
 @media (max-width: 768px) {
   .banner {
     min-height: 20rem;

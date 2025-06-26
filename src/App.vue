@@ -1,10 +1,35 @@
 <template>
+  <div class="layout">
     <TheNavigation />
-    <router-view></router-view>
+    <main class="main-content">
+      <router-view></router-view>
+    </main>
+    <TheFooter />
+  </div>
 </template>
 
 <script setup>
 import TheNavigation from "./components/TheNavigation.vue";
+import TheFooter from "./components/TheFooter.vue";
 </script>
+
+<style scoped>
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+</style>
 
 
