@@ -4,29 +4,29 @@
       <div class="footer-columns">
         <div class="left-columns">
           <ul>
-            <li><router-link to="">Home</router-link></li>
-            <li><router-link to="">About us</router-link></li>
-            <li><router-link to="">Reviews</router-link></li>
+            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="#">About us</router-link></li>
+            <li><router-link to="#">Reviews</router-link></li>
           </ul>
           <ul>
-            <li><router-link to="">Bedroom</router-link></li>
-            <li><router-link to="">Living room</router-link></li>
-            <li><router-link to="">Kitchen</router-link></li>
+            <li><router-link to="/bedroom">Bedroom</router-link></li>
+            <li><router-link to="/living-room">Living room</router-link></li>
+            <li><router-link to="/kitchen">Kitchen</router-link></li>
           </ul>
           <ul>
-            <li><router-link to="">Dining room</router-link></li>
-            <li><router-link to="">Garden</router-link></li>
-            <li><router-link to="">Bathroom</router-link></li>
+            <li><router-link to="/dining-room">Dining room</router-link></li>
+            <li><router-link to="/garden">Garden</router-link></li>
+            <li><router-link to="/bathroom">Bathroom</router-link></li>
           </ul>
           <ul>
-            <li><router-link to="">Contact</router-link></li>
-            <li><router-link to="">Privacy Policy</router-link></li>
-            <li><router-link to="">Terms of use</router-link></li>
+            <li><router-link to="#">Contact</router-link></li>
+            <li><router-link to="#">Privacy Policy</router-link></li>
+            <li><router-link to="#">Terms of use</router-link></li>
           </ul>
         </div>
         <ul class="right-column">
-          <li><router-link to="">Instagram</router-link></li>
-          <li><router-link to="">Facebook</router-link></li>
+          <li><router-link to="#">Instagram</router-link></li>
+          <li><router-link to="#">Facebook</router-link></li>
         </ul>
       </div>
       <p class="logo">perco</p>
@@ -87,6 +87,7 @@ a {
 .footer-bottom {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .footer-bottom p {
