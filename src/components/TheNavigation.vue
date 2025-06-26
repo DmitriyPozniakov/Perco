@@ -2,7 +2,7 @@
   <nav>
     <div class="left-side-mobile mobile-div">
       <img src="@/assets/images/menu.svg" alt="" />
-      <p class="logo">perco</p>
+      <router-link to="/" class="logo">perco</router-link>
     </div>
     <div class="right-side-mobile mobile-div">
       <img src="@/assets/images/user.svg" alt="" />
@@ -10,18 +10,18 @@
     </div>
     <div class="desktop-div">
       <div class="desktop-column-1">
-        <p class="logo">perco</p>
+        <router-link to="/" class="logo">perco</router-link>
       </div>
       <div class="column-wrapper">
         <div class="desktop-column-2">
-          <a href="#">Bedroom</a>
-          <a href="#">Living room</a>
-          <a href="#">Kitchen</a>
+          <router-link to="/bedroom">Bedroom</router-link>
+          <router-link to="/living-room">Living room</router-link>
+          <router-link to="/kitchen">Kitchen</router-link>
         </div>
         <div class="desktop-column-3">
-          <a href="#">Dining room</a>
-          <a href="#">Garden</a>
-          <a href="#">Bathroom</a>
+          <router-link to="/dining-room">Dining room</router-link>
+          <router-link to="/garden">Garden</router-link>
+          <router-link to="/bathroom">Bathroom</router-link>
         </div>
       </div>
       <div class="user-info">

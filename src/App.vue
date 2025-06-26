@@ -1,13 +1,10 @@
 <template>
     <TheNavigation />
-    <TheHero />
-    <ShopNow />
+    <router-view></router-view>
 </template>
 
 <script setup>
 import TheNavigation from "./components/TheNavigation.vue";
-import TheHero from "./components/TheHero.vue";
-import ShopNow from "./components/ShopNow.vue";
 </script>
 
 
