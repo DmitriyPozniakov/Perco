@@ -33,7 +33,7 @@
     </div>
     <div class="footer-bottom">
       <p>{{ currentYear }}</p>
-      <p>preco@gmail.com</p>
+      <p>perco@gmail.com</p>
     </div>
   </footer>
 </template>

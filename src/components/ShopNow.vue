@@ -14,6 +14,7 @@
   gap: 15px;
   position: relative;
   padding: 30px;
+  height: 70rem;
 }
 .shop-now-section::before {
   content: "";

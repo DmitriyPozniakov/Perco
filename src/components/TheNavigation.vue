@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="user-info">
-        <a href="#" class="account">Account</a>
+        <router-link to="/login" class="account">Account</router-link>
         <div class="bag-wraper">
           <img src="@/assets/images/bag.svg" alt="" />
           <a href="#">Bag</a>

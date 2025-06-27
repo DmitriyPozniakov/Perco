@@ -45,7 +45,7 @@
   height: 100%;
   background-image: url("../assets/images/Bitmap.png"); /* поправлен путь */
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-position: center;
   z-index: 0;
   pointer-events: none;
@@ -112,9 +112,9 @@ h1 {
 
 .hero-image {
   width: 100%;
-  height: 30rem;
+  height: 50rem;
   object-fit: cover;
-  object-position: center;
+  object-position: center 65%;
   border-radius: 8px;
 }
 
@@ -153,11 +153,20 @@ h1 {
     display: flex;
     justify-content: space-between;
   }
+  .centered {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    height: 30rem;
+  }
 }
 
 @media (min-width: 1200px) {
   h1 {
-    width: 120rem
+    width: 120rem;
   }
 }
 </style>

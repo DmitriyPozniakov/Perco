@@ -6,6 +6,7 @@ import GardenPage from '@/pages/GardenPage.vue';
 import HomePage from '@/pages/HomePage.vue';
 import KitchenPage from '@/pages/KitchenPage.vue';
 import LivingroomPage from '@/pages/LivingroomPage.vue';
+import TheLogin from '@/components/TheLogin.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
@@ -15,6 +16,7 @@ const routes = [
     { path: '/garden', name: 'garden', component: GardenPage },
     { path: '/kitchen', name: 'kitchen', component: KitchenPage },
     { path: '/living-room', name: 'livingRoom', component: LivingroomPage },
+    { path: '/login', name: 'loginForm', component: TheLogin}
 ]
 
 const router = createRouter({
