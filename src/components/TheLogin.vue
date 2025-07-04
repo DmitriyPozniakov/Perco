@@ -144,9 +144,13 @@ a {
     .login-section {
         flex-direction: column;
         gap: 75px;
+         min-height: 75rem;
     }
     form {
         padding: 40px; 
+    }
+    .logo {
+      display: none;
     }
 }
 </style>

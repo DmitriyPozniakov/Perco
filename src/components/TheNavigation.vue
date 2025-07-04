@@ -5,7 +5,9 @@
       <router-link to="/" class="logo">perco</router-link>
     </div>
     <div class="right-side-mobile mobile-div">
-      <img src="@/assets/images/user.svg" alt="" />
+      <router-link to="/login">
+        <img src="@/assets/images/user.svg" alt="" />
+      </router-link>
       <img src="@/assets/images/bag.svg" alt="" />
     </div>
     <div class="desktop-div">
