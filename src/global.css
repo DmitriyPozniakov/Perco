@@ -23,6 +23,7 @@ a {
     text-decoration: none;
 }
 
-button, a {
+button,
+a {
     cursor: pointer;
 }

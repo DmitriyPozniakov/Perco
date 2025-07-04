@@ -16,14 +16,14 @@
       </div>
       <div class="column-wrapper">
         <div class="desktop-column-2">
-          <router-link to="/bedroom">Bedroom</router-link>
-          <router-link to="/living-room">Living room</router-link>
-          <router-link to="/kitchen">Kitchen</router-link>
+          <router-link to="/category/bedroom">Bedroom</router-link>
+          <router-link to="/category/living-room">Living room</router-link>
+          <router-link to="/category/kitchen">Kitchen</router-link>
         </div>
         <div class="desktop-column-3">
-          <router-link to="/dining-room">Dining room</router-link>
-          <router-link to="/garden">Garden</router-link>
-          <router-link to="/bathroom">Bathroom</router-link>
+          <router-link to="/category/dining-room">Dining room</router-link>
+          <router-link to="/category/garden">Garden</router-link>
+          <router-link to="/category/bathroom">Bathroom</router-link>
         </div>
       </div>
       <div class="user-info">

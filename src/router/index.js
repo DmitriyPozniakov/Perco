@@ -1,22 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import BathroomPage from '@/pages/BathroomPage.vue';
-import BedroomPage from '@/pages/BedroomPage.vue';
-import DiningroomPage from '@/pages/DiningroomPage.vue';
-import GardenPage from '@/pages/GardenPage.vue';
+import CategoryPage from '@/pages/CategoryPage.vue';
 import HomePage from '@/pages/HomePage.vue';
-import KitchenPage from '@/pages/KitchenPage.vue';
-import LivingroomPage from '@/pages/LivingroomPage.vue';
 import TheLogin from '@/components/TheLogin.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
-    { path: '/bathroom', name: 'bathroom', component: BathroomPage },
-    { path: '/bedroom', name: 'bedroom', component: BedroomPage },
-    { path: '/dining-room', name: 'diningRoom', component: DiningroomPage },
-    { path: '/garden', name: 'garden', component: GardenPage },
-    { path: '/kitchen', name: 'kitchen', component: KitchenPage },
-    { path: '/living-room', name: 'livingRoom', component: LivingroomPage },
-    { path: '/login', name: 'loginForm', component: TheLogin}
+    { path: '/category/:category', name: 'CategoryPage', component: CategoryPage },
+    { path: '/login', name: 'loginForm', component: TheLogin }
 ]
 
 const router = createRouter({

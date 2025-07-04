@@ -5,6 +5,9 @@ import './fonts.css'
 import router from './router'
 import store from './store'
 import CategoryBanner from './base/CategoryBanner.vue'
+import baseLoader from './base/baseLoader.vue'
+import baseCard from './base/baseCard.vue'
+import baseDiscount from './base/baseDiscount.vue'
 
 const app = createApp(App)
 
@@ -12,6 +15,9 @@ app.use(router)
 app.use(store)
 
 app.component('category-banner', CategoryBanner)
+app.component('base-loader', baseLoader)
+app.component('base-card', baseCard)
+app.component('base-discount', baseDiscount)
 
 app.mount('#app')
 
