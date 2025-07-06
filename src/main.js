@@ -8,6 +8,7 @@ import CategoryBanner from './base/CategoryBanner.vue'
 import baseLoader from './base/baseLoader.vue'
 import baseCard from './base/baseCard.vue'
 import baseDiscount from './base/baseDiscount.vue'
+import baseButton from './base/baseButton.vue'
 
 const app = createApp(App)
 
@@ -18,6 +19,7 @@ app.component('category-banner', CategoryBanner)
 app.component('base-loader', baseLoader)
 app.component('base-card', baseCard)
 app.component('base-discount', baseDiscount)
+app.component('base-button', baseButton)
 
 app.mount('#app')
 

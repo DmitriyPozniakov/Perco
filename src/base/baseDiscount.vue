@@ -19,7 +19,7 @@ div {
   font-size: 1.6rem;
 
   position: absolute;
-  top: 2%;
+  top: 3%;
   right: 0;
 }
 </style>

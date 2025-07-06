@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <router-link :to="`/products/${product._id}`" class="card">
     <div class="card-img-container">
       <img :src="product.images[0]" alt="" />
     </div>
@@ -13,11 +13,10 @@
       </div>
     </div>
     <base-discount v-if="product.discount">{{ product.discount }}%</base-discount>
-  </div>
+  </router-link>
 </template>
 
 <script setup>
-
 // eslint-disable-next-line no-undef
 defineProps({
   product: Object,

@@ -9,14 +9,14 @@
             <li><router-link to="#">Reviews</router-link></li>
           </ul>
           <ul>
-            <li><router-link to="/bedroom">Bedroom</router-link></li>
-            <li><router-link to="/living-room">Living room</router-link></li>
-            <li><router-link to="/kitchen">Kitchen</router-link></li>
+            <li><router-link to="/category/bedroom">Bedroom</router-link></li>
+            <li><router-link to="/category/living-room">Living room</router-link></li>
+            <li><router-link to="/category/kitchen">Kitchen</router-link></li>
           </ul>
           <ul>
-            <li><router-link to="/dining-room">Dining room</router-link></li>
-            <li><router-link to="/garden">Garden</router-link></li>
-            <li><router-link to="/bathroom">Bathroom</router-link></li>
+            <li><router-link to="/category/dining-room">Dining room</router-link></li>
+            <li><router-link to="/category/garden">Garden</router-link></li>
+            <li><router-link to="/category/bathroom">Bathroom</router-link></li>
           </ul>
           <ul>
             <li><router-link to="#">Contact</router-link></li>
