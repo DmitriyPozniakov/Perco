@@ -30,6 +30,14 @@ body {
   flex: 1;
 }
 
+
+@media (min-width: 1980px) {
+  .layout {
+    max-width: 1980px; /* можно менять под твой дизайн */
+    margin: 0 auto;
+  }
+}
+
 </style>
 
 

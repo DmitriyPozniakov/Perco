@@ -1,11 +1,10 @@
-const VUE_APP_API_URL = process.env.VUE_APP_API_URL
-
 export default {
     namespaced: true,
     state: () => ({
         all: [],
         filtered: [],
         selected: null,
+        selectedType: [],
         loading: true
     }),
     mutations: {
@@ -18,6 +17,9 @@ export default {
         SET_SELECTED_PRODUCT(state, product) {
             state.selected = product;
         },
+        SET_TYPE_PRODUCTS(state, products) {
+            state.selectedType = products;
+        },
         SET_LOADING(state, value) {
             state.loading = value
         }
@@ -26,7 +28,7 @@ export default {
         async fetchAllProducts({ commit }) {
             commit('SET_LOADING', true)
             try {
-                const res = await fetch(`${VUE_APP_API_URL}/products`);
+                const res = await fetch(`https://perco-back.onrender.com/products`);
                 const data = await res.json();
                 commit('SET_PRODUCTS', data);
             } catch (err) {
@@ -59,12 +61,22 @@ export default {
             } finally {
                 commit('SET_LOADING', false);
             }
+        },
+        async fetchProductsByType({ commit }, type) {
+            try {
+                const res = await fetch(`https://perco-back.onrender.com/products/type/${type}`);
+                const data = await res.json();
+                commit('SET_TYPE_PRODUCTS', data);
+            } catch (err) {
+                console.error('Ошибка загрузки типов:', err)
+            }
         }
     },
     getters: {
         allProducts: (state) => state.all,
         filteredProducts: (state) => state.filtered,
         isLoading: (state) => state.loading,
-        productById: (state) => state.selected
+        productById: (state) => state.selected,
+        typeProducts: (state) => state.selectedType
     }
 }

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import CategoryPage from '@/pages/CategoryPage.vue';
 import HomePage from '@/pages/HomePage.vue';
-import TheLogin from '@/components/TheLogin.vue';
+import TheLogin from '@/pages/TheLogin.vue';
 import ProductPage from '@/pages/ProductPage.vue';
 
 const routes = [

@@ -7,8 +7,8 @@
 
   <div v-else class="cards-container">
     <base-card
+    v-for="product in filtered"
       :product="product"
-      v-for="product in filtered"
       :key="product._id"
     />
   </div>
@@ -39,17 +39,7 @@ const isLoading = computed(() => store.getters["products/isLoading"]);
 </script>
 
 <style scoped>
-.loader-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60vh;
-}
-.cards-container {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding: 30px;
-}
+
+
 </style>
 

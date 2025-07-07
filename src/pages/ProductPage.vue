@@ -1,5 +1,9 @@
 <template>
-  <section v-if="product">
+  <div v-if="isLoading" class="loader-wrapper">
+    <base-loader />
+  </div>
+
+  <section v-else-if="product">
     <div class="breadcrumbs-container">
       <span>
         <router-link to="/">Homepage</router-link> /
@@ -27,14 +31,16 @@
         <base-accordion></base-accordion>
       </div>
     </div>
+    <may-like :type="type"></may-like>
   </section>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted, computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import placeholder from "@/assets/images/placeholder.svg";
+import MayLike from "@/components/MayLike.vue";
 
 const route = useRoute();
 const store = useStore();
@@ -53,8 +59,17 @@ const filledImages = computed(() => {
   return [...actualImages, ...placeholders];
 });
 
+watch(
+  () => route.params.id,
+  (newId) => {
+    store.dispatch("products/fetchProductById", newId);
+  }
+);
+
 const product = computed(() => store.getters["products/productById"]);
-// const isLoading = computed(() => store.getters["products/isLoading"]);
+const isLoading = computed(() => store.getters["products/isLoading"]);
+const type = computed(() => product.value.type || null);
+
 </script>
 
 
@@ -101,6 +116,7 @@ img {
 .info-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20rem;
 }
 
 .product-name,

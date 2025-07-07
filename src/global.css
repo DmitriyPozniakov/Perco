@@ -27,3 +27,17 @@ button,
 a {
     cursor: pointer;
 }
+
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}
+
+.cards-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 30px;
+}

@@ -109,11 +109,10 @@ a {
 }
 
 .without-acc {
-    opacity: 0.8;
-    margin-top: 10px;
-    text-align: center;
+  opacity: 0.8;
+  margin-top: 10px;
+  text-align: center;
 }
-
 
 .form-buttons {
   display: flex;
@@ -141,16 +140,16 @@ a {
 }
 
 @media (max-width: 1200px) {
-    .login-section {
-        flex-direction: column;
-        gap: 75px;
-         min-height: 75rem;
-    }
-    form {
-        padding: 40px; 
-    }
-    .logo {
-      display: none;
-    }
+  .login-section {
+    flex-direction: column;
+    gap: 75px;
+    min-height: 75rem;
+  }
+  form {
+    padding: 40px;
+  }
+  .logo {
+    display: none;
+  }
 }
 </style>
