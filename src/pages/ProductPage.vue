@@ -11,10 +11,22 @@
       </span>
       <base-button>ADD TO CART</base-button>
     </div>
-    <img :src="product.images[0]" alt="" />
-    <h1 class="product-name">{{ product.name }}</h1>
-    <p class="product-price">${{ product.price }}</p>
-    <p class="product-about">{{ product.about }}</p>
+    <div class="images-wrapper">
+      <div class="image-box" v-for="(img, index) in filledImages" :key="index">
+        <img :src="img" alt="Product image" />
+      </div>
+    </div>
+    <div class="info-container">
+      <div class="left-side-info">
+        <h1 class="product-name">{{ product.name }}</h1>
+        <p class="product-price">${{ product.price }}</p>
+        <p class="product-about">{{ product.about }}</p>
+      </div>
+      <div class="right-side-info">
+        <h1 class="product-name info-title">Information</h1>
+        <base-accordion></base-accordion>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -22,6 +34,7 @@
 import { onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import placeholder from "@/assets/images/placeholder.svg";
 
 const route = useRoute();
 const store = useStore();
@@ -29,6 +42,15 @@ const id = route.params.id;
 
 onMounted(() => {
   store.dispatch("products/fetchProductById", id);
+});
+
+const filledImages = computed(() => {
+  if (!product.value || !product.value.images) return [];
+  const actualImages = product.value.images;
+  const placeholderCount = Math.max(0, 5 - actualImages.length);
+  const placeholders = new Array(placeholderCount).fill(placeholder);
+
+  return [...actualImages, ...placeholders];
 });
 
 const product = computed(() => store.getters["products/productById"]);
@@ -44,6 +66,13 @@ section {
 .breadcrumbs-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.images-wrapper {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 50px;
 }
 
 a,
@@ -61,13 +90,17 @@ span {
 }
 
 img {
+  height: 100%;
   width: 100%;
-  max-width: 40rem !important;
-  height: auto;
   object-fit: contain;
   display: block;
-  max-width: 100%;
-  max-height: 60rem;
+  max-width: 40rem;
+  background: #e7e7e7;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .product-name,
@@ -78,7 +111,17 @@ img {
   font-weight: 600;
   text-transform: uppercase;
   margin-bottom: 16px;
+}
 
+.info-title {
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.right-side-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .product-about {
@@ -88,12 +131,5 @@ img {
   font-size: 2rem;
   font-weight: 300;
   text-align: justify;
-}
-
-@media (min-width: 1024px) {
-  img {
-    width: 32rem;
-    height: 50rem;
-  }
 }
 </style>

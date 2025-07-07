@@ -9,6 +9,7 @@ import baseLoader from './base/baseLoader.vue'
 import baseCard from './base/baseCard.vue'
 import baseDiscount from './base/baseDiscount.vue'
 import baseButton from './base/baseButton.vue'
+import BaseAccordion from './base/BaseAccordion.vue'
 
 const app = createApp(App)
 
@@ -20,6 +21,7 @@ app.component('base-loader', baseLoader)
 app.component('base-card', baseCard)
 app.component('base-discount', baseDiscount)
 app.component('base-button', baseButton)
+app.component('base-accordion', BaseAccordion)
 
 app.mount('#app')
 
