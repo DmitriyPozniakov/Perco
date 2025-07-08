@@ -1,7 +1,7 @@
 <template>
   <router-link :to="`/products/${product._id}`" class="card">
     <div class="card-img-container">
-      <img :src="product.images[0]" alt="" />
+      <img :src="product.images[0]" :alt="product.about" />
     </div>
     <div class="card-info">
       <h2 class="heading">{{ product.name }} {{ product.type }}</h2>

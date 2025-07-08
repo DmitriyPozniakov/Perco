@@ -1,7 +1,7 @@
 <template>
   <section class="login-section">
     <p class="logo">perco</p>
-    <form>
+    <form @submit.prevent="handleLogin">
       <div class="form-header">
         <p class="form-logo">Login</p>
         <p class="form-text">
@@ -10,18 +10,78 @@
         </p>
       </div>
       <div class="form-inputs">
-        <input type="email" placeholder="Email address" />
-        <input type="password" placeholder="Password" />
+        <input
+          v-model="email"
+          type="email"
+          placeholder="Email address"
+          required
+        />
+        <input
+          v-model="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
         <a href="#" class="forgot">Forgot password?</a>
       </div>
       <div class="form-buttons">
-        <button class="login-button">Log in</button>
-        <button class="guest-button">Continue as a guest</button>
-        <a href="#" class="without-acc">Don’t have an account? Sign up</a>
+        <button class="login-button" :disabled="loading" type="submit">
+          {{ loading ? "Logging in..." : "Log in" }}
+        </button>
+        <button
+          class="guest-button"
+          type="button"
+          :disabled="loading"
+          @click="handleGuest"
+        >
+          Continue as a guest
+        </button>
+        <a href="#" class="without-acc" @click.prevent="handleSignUp">
+          Don’t have an account? Sign up
+        </a>
       </div>
+      <p v-if="error" style="color: red; margin-top: 10px">{{ error }}</p>
     </form>
   </section>
 </template>
+
+<script setup>
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+const email = ref('');
+const password = ref('');
+
+const loading = computed(() => store.getters['auth/isLoading']);
+const error = computed(() => store.getters['auth/authError']);
+
+async function handleLogin() {
+  await store.dispatch('auth/signIn', { email: email.value, password: password.value });
+  if (!store.getters['auth/authError']) {
+    alert('Logged in successfully!');
+  }
+}
+
+async function handleGuest() {
+  await store.dispatch('auth/signInAnon');
+  if (!store.getters['auth/authError']) {
+    alert('Logged in as guest!');
+  }
+}
+
+async function handleSignUp() {
+  if (!email.value || !password.value) {
+    alert('Enter email and password for sign up');
+    return;
+  }
+  await store.dispatch('auth/signUp', { email: email.value, password: password.value });
+  if (!store.getters['auth/authError']) {
+    alert('Registered successfully!');
+  }
+}
+</script>
 
 <style scoped>
 .login-section {

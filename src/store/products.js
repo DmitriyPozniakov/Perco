@@ -28,7 +28,7 @@ export default {
         async fetchAllProducts({ commit }) {
             commit('SET_LOADING', true)
             try {
-                const res = await fetch(`https://perco-back.onrender.com/products`);
+                const res = await fetch(`${process.env.VUE_APP_URL}/products`);
                 const data = await res.json();
                 commit('SET_PRODUCTS', data);
             } catch (err) {
@@ -40,7 +40,7 @@ export default {
         async fetchProductsByCategory({ commit }, category) {
             commit('SET_LOADING', true)
             try {
-                const res = await fetch(`https://perco-back.onrender.com/products/category/${category}`);
+                const res = await fetch(`${process.env.VUE_APP_URL}/products/category/${category}`);
                 const data = await res.json();
                 commit('SET_FILTERED', data);
             } catch (err) {
@@ -52,7 +52,7 @@ export default {
         async fetchProductById({ commit }, id) {
             commit('SET_LOADING', true)
             try {
-                const res = await fetch(`https://perco-back.onrender.com/products/${id}`);
+                const res = await fetch(`${process.env.VUE_APP_URL}/products/${id}`);
                 const data = await res.json();
                 commit('SET_SELECTED_PRODUCT', data);
             } catch (err) {
@@ -64,7 +64,7 @@ export default {
         },
         async fetchProductsByType({ commit }, type) {
             try {
-                const res = await fetch(`https://perco-back.onrender.com/products/type/${type}`);
+                const res = await fetch(`${process.env.VUE_APP_URL}/products/type/${type}`);
                 const data = await res.json();
                 commit('SET_TYPE_PRODUCTS', data);
             } catch (err) {
