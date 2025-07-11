@@ -41,3 +41,26 @@ a {
     flex-wrap: wrap;
     padding: 30px;
 }
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 30px 0px 30px;
+}
+
+.filter-container p, 
+.filter-container label {
+    color: #302a18;
+    font-family: 'SFR-regular';
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.filter-container p {
+   opacity: 0.7;
+}
+
+.label {
+    margin-right: 10px;
+}

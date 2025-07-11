@@ -5,6 +5,7 @@ export default {
         filtered: [],
         selected: null,
         selectedType: [],
+        sortOrder: "",
         loading: true
     }),
     mutations: {
@@ -19,6 +20,9 @@ export default {
         },
         SET_TYPE_PRODUCTS(state, products) {
             state.selectedType = products;
+        },
+        SET_SORT_ORDER(state, order) {
+            state.sortOrder = order
         },
         SET_LOADING(state, value) {
             state.loading = value
@@ -70,11 +74,27 @@ export default {
             } catch (err) {
                 console.error('Ошибка загрузки типов:', err)
             }
+        },
+        setSortOrder({ commit }, order) {
+            commit("SET_SORT_ORDER", order);
         }
     },
     getters: {
         allProducts: (state) => state.all,
-        filteredProducts: (state) => state.filtered,
+        filteredProducts: (state) => {
+            const products = [...state.filtered];
+
+            if (state.sortOrder === "lowest") {
+                return products.sort((a, b) => a.price - b.price);
+            }
+
+            if (state.sortOrder === "highest") {
+                return products.sort((a, b) => b.price - a.price);
+            }
+
+            return products; // без сортировки
+        },
+
         isLoading: (state) => state.loading,
         productById: (state) => state.selected,
         typeProducts: (state) => state.selectedType

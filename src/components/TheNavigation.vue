@@ -41,7 +41,7 @@
 nav {
   display: flex;
   justify-content: space-between;
-  padding: 16px 40px;
+  padding: 16px 20px;
 }
 
 .desktop-div {

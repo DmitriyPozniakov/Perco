@@ -61,7 +61,7 @@ defineProps({
   color: #302a18;
   font-family: "SFR-bold";
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .heading {

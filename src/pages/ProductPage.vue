@@ -116,6 +116,7 @@ img {
 .info-container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 20rem;
 }
 
@@ -124,7 +125,7 @@ img {
   color: #302a18;
   font-family: "SFR-bold";
   font-size: 2.2rem;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 16px;
 }
@@ -132,6 +133,10 @@ img {
 .info-title {
   display: inline-block;
   align-self: flex-start;
+}
+
+.left-side-info {
+  margin-bottom: 30px;
 }
 
 .right-side-info {
