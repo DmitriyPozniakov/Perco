@@ -1,5 +1,5 @@
 import { auth } from "@/firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously } from "firebase/auth";
 
 export default {
     namespaced: true,
@@ -56,18 +56,6 @@ export default {
                 commit('SET_LOADING', false);
             }
         },
-        async signOutUser({ commit }) {
-            commit('SET_LOADING', true);
-            commit('SET_ERROR', null);
-            try {
-                await signOut(auth);
-                commit('SET_USER', null);
-            } catch (error) {
-                commit('SET_ERROR', error.message);
-            } finally {
-                commit('SET_LOADING', false);
-            }
-        },
         // слушатель изменения статуса аутентификации
         listenAuthStateChange({ commit }) {
             auth.onAuthStateChanged(user => {
@@ -78,6 +66,7 @@ export default {
     getters: {
         isAuthenticated: (state) => !!state.user,
         currentUser: (state) => state.user,
+        currentUserUid: state => state.user?.uid || null,
         authError: (state) => state.error,
         isLoading: (state) => state.loading,
     },

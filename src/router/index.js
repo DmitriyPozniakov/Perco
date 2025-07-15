@@ -3,12 +3,14 @@ import CategoryPage from '@/pages/CategoryPage.vue';
 import HomePage from '@/pages/HomePage.vue';
 import TheLogin from '@/pages/TheLogin.vue';
 import ProductPage from '@/pages/ProductPage.vue';
+import TheBag from '@/pages/TheBag.vue';
 
 const routes = [
     { path: '/', name: 'Home', component: HomePage },
     { path: '/category/:category', name: 'CategoryPage', component: CategoryPage },
     { path: '/login', name: 'loginForm', component: TheLogin },
-    { path: '/products/:id', name: 'productPage', component: ProductPage}
+    { path: '/products/:id', name: 'productPage', component: ProductPage },
+    { path: '/bag/:id', name: 'shoppingBag', component: TheBag }
 ]
 
 const router = createRouter({

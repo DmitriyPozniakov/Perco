@@ -5,7 +5,7 @@
 
   <section v-else-if="product">
     <div class="breadcrumbs-container">
-      <span>
+      <span v-if="!isMobile">
         <router-link to="/">Homepage</router-link> /
         <router-link :to="`/category/${product.category.replace(/\s+/g, '-')}`">
           {{ product.category }}
@@ -13,7 +13,12 @@
         /
         <span class="breadcrumb-name">{{ product.name }}</span>
       </span>
-      <base-button>ADD TO CART</base-button>
+      <span v-else>
+        <router-link class="breadcrumb-name"  :to="`/category/${product.category.replace(/\s+/g, '-')}`">
+          {{ product.category }}
+        </router-link>
+      </span>
+      <base-button class="sticky-bottom-button">ADD TO CART</base-button>
     </div>
     <div class="images-wrapper">
       <div class="image-box" v-for="(img, index) in filledImages" :key="index">
@@ -36,7 +41,7 @@
 </template>
 
 <script setup>
-import { onMounted, computed, watch } from "vue";
+import { onMounted, computed, watch, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import placeholder from "@/assets/images/placeholder.svg";
@@ -66,10 +71,19 @@ watch(
   }
 );
 
+const isMobile = ref(window.innerWidth <= 480);
+
+const updateWidth = () => {
+  isMobile.value = window.innerWidth <= 480;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", updateWidth);
+});
+
 const product = computed(() => store.getters["products/productById"]);
 const isLoading = computed(() => store.getters["products/isLoading"]);
 const type = computed(() => product.value.type || null);
-
 </script>
 
 
@@ -152,5 +166,20 @@ img {
   font-size: 2rem;
   font-weight: 300;
   text-align: justify;
+}
+
+@media (max-width: 480px) {
+  .sticky-bottom-button {
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    width: 100%;
+    z-index: 1000;
+    max-width: 90%;
+    transform: translateX(-50%);
+    padding: 16px;
+    border-radius: 43px;
+    box-shadow: -4px 4px 21.8px 0px rgba(0, 0, 0, 0.05);
+  }
 }
 </style>

@@ -81,6 +81,7 @@ async function handleSignUp() {
     alert('Registered successfully!');
   }
 }
+
 </script>
 
 <style scoped>

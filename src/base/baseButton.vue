@@ -8,7 +8,7 @@
 button {
   border-radius: 8px;
   background: #302a18;
-  max-width: 21rem;
+  /* max-width: 21rem; */
   height: 5rem;
   padding: 13px 34px;
   color: #fff;
