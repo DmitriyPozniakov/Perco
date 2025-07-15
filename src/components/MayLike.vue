@@ -36,8 +36,16 @@ h2 {
   font-size: clamp(5.5rem, 10vw, 12rem);
   font-weight: 400;
   color: #302a18;
+  margin-bottom: 30px;
 }
 .cards-container {
-  padding-left: 0;
+  padding: 0;
 }
+
+@media (max-width: 720px) {
+  .cards-container {
+    justify-content: center;
+  }
+}
+
 </style>
