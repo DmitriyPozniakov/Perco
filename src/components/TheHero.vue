@@ -40,7 +40,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../assets/images/Bitmap.png"); /* поправлен путь */
+  background-image: url("../assets/images/Bitmap.png");
   background-size: cover;
   background-repeat: repeat;
   background-position: center;
