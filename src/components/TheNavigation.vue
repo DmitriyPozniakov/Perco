@@ -1,7 +1,8 @@
 <template>
   <nav>
+    <!-- MOBILE -->
     <div class="left-side-mobile mobile-div">
-      <img src="@/assets/images/menu.svg" alt="" />
+      <img src="@/assets/images/menu.svg" alt="menu" @click="toggleMenu" />
       <router-link to="/" class="logo">perco</router-link>
     </div>
     <div class="right-side-mobile mobile-div">
@@ -10,6 +11,36 @@
       </router-link>
       <img src="@/assets/images/bag.svg" alt="" />
     </div>
+
+    <!-- MOBILE SLIDE MENU -->
+    <transition name="slide">
+      <div v-if="isMenuOpen" class="mobile-menu">
+        <div class="mobile-menu-header">
+          <span class="close-btn" @click="toggleMenu">✕</span>
+        </div>
+        <router-link to="/category/bedroom" @click="toggleMenu"
+          >Bedroom</router-link
+        >
+        <router-link to="/category/living-room" @click="toggleMenu"
+          >Living Room</router-link
+        >
+        <router-link to="/category/kitchen" @click="toggleMenu"
+          >Kitchen</router-link
+        >
+        <router-link to="/category/dining-room" @click="toggleMenu"
+          >Dining Room</router-link
+        >
+        <router-link to="/category/garden" @click="toggleMenu"
+          >Garden</router-link
+        >
+        <router-link to="/category/bathroom" @click="toggleMenu"
+          >Bathroom</router-link
+        >
+        <router-link to="/login" @click="toggleMenu">Account</router-link>
+      </div>
+    </transition>
+
+    <!-- DESKTOP -->
     <div class="desktop-div">
       <div class="desktop-column-1">
         <router-link to="/" class="logo">perco</router-link>
@@ -36,6 +67,16 @@
     </div>
   </nav>
 </template>
+
+<script setup>
+import {ref} from 'vue';
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+}
+</script>
 
 <style scoped>
 nav {
@@ -95,6 +136,46 @@ a {
 .bag-wraper {
   gap: 10px;
 }
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100vh;
+  background: #fff;
+  padding: 30px 20px;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #302a18;
+}
+
+/* Transition */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+.slide-enter-from {
+  transform: translateX(-100%);
+}
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+
 
 @media (max-width: 768px) {
   .desktop-div {
