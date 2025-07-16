@@ -180,10 +180,7 @@ img {
   width: 20px;
 }
 
-.mobile-bread {
-  display: flex;
-  gap: 8px;
-}
+
 
 .info-container {
   display: flex;

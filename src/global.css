@@ -65,6 +65,12 @@ a {
     margin-right: 10px;
 }
 
+.mobile-bread {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 @media (max-width: 720px) {
     .cards-container {
         justify-content: center;
