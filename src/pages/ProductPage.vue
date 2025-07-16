@@ -15,9 +15,10 @@
       </span>
       <span v-else>
         <router-link
-          class="breadcrumb-name"
-          :to="`/category/${product.category.replace(/\s+/g, '-')}`"
+        class="breadcrumb-name mobile-bread"
+        :to="`/category/${product.category.replace(/\s+/g, '-')}`"
         >
+        <img class="arrow" src="@/assets/images/arrow-left.svg" alt="">
           {{ product.category }}
         </router-link>
       </span>
@@ -170,6 +171,18 @@ img {
   display: block;
   max-width: 40rem;
   background: #e7e7e7;
+}
+
+.arrow {
+  max-width: none;
+  background: none;
+  height: 20px;
+  width: 20px;
+}
+
+.mobile-bread {
+  display: flex;
+  gap: 8px;
 }
 
 .info-container {
