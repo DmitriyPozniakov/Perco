@@ -1,10 +1,7 @@
 <template>
   <section class="hero-section">
     <div class="centered">
-      <div class="input-wrapper">
-        <img src="@/assets/images/search.svg" class="search-icon" alt="" />
-        <input type="text" placeholder="Search" />
-      </div>
+      <base-input></base-input>
     </div>
     <div class="text-wrapper">
       <h1>Synthesis of Luxury</h1>
@@ -57,34 +54,6 @@
   width: 100%;
   padding: 0 15px;
   margin-bottom: 30px;
-}
-
-.input-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.search-icon {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-input {
-  width: 100%;
-  height: 42px;
-  padding: 12px 12px 12px 40px;
-  border-radius: 8px;
-  color: #302a18;
-  font-family: "SFR-regular";
-}
-
-input::placeholder {
-  color: #302a18;
-  font-family: "SFR-regular";
-  opacity: 0.5;
 }
 
 h1 {

@@ -64,3 +64,9 @@ a {
 .label {
     margin-right: 10px;
 }
+
+@media (max-width: 720px) {
+    .cards-container {
+        justify-content: center;
+    }
+}

@@ -19,14 +19,14 @@
             <li><router-link to="/category/bathroom">Bathroom</router-link></li>
           </ul>
           <ul>
-            <li><router-link to="#">Contact</router-link></li>
-            <li><router-link to="#">Privacy Policy</router-link></li>
-            <li><router-link to="#">Terms of use</router-link></li>
+            <li><router-link to="/404">Contact</router-link></li>
+            <li><router-link to="/404">Privacy Policy</router-link></li>
+            <li><router-link to="/404">Terms of use</router-link></li>
           </ul>
         </div>
         <ul class="right-column">
-          <li><router-link to="#">Instagram</router-link></li>
-          <li><router-link to="#">Facebook</router-link></li>
+          <li><router-link to="/404">Instagram</router-link></li>
+          <li><router-link to="/404">Facebook</router-link></li>
         </ul>
       </div>
       <p class="logo">perco</p>
