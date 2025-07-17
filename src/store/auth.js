@@ -50,6 +50,7 @@ export default {
             try {
                 const userCredential = await signInAnonymously(auth);
                 commit('SET_USER', userCredential.user);
+                return userCredential.user;
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {

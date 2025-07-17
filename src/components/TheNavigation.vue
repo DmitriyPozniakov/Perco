@@ -58,9 +58,12 @@
         </div>
       </div>
       <div class="user-info">
-        <router-link to="/login" class="account">Account</router-link>
         <div class="bag-wraper">
-          <img src="@/assets/images/bag.svg" alt="" />
+          <img src="@/assets/images/user.svg" alt="account">
+          <router-link to="/login" class="account">Account</router-link>
+        </div>
+        <div class="bag-wraper">
+          <img src="@/assets/images/bag.svg" alt="bag" />
           <a href="#">Bag</a>
         </div>
       </div>
@@ -69,13 +72,13 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import { ref } from "vue";
 
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
-}
+};
 </script>
 
 <style scoped>
@@ -175,7 +178,6 @@ a {
 .slide-leave-to {
   transform: translateX(-100%);
 }
-
 
 @media (max-width: 768px) {
   .desktop-div {

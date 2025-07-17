@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
@@ -81,6 +81,15 @@ async function handleSignUp() {
     alert('Registered successfully!');
   }
 }
+
+const uid = computed(() => store.getters['auth/currentUserUid']);
+
+watch(uid, (newUid) => {
+  if (newUid) {
+    console.log('User UID:', newUid);
+  }
+});
+
 
 </script>
 

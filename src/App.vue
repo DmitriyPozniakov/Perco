@@ -9,8 +9,17 @@
 </template>
 
 <script setup>
+import { useStore } from "vuex";
+import { onMounted } from "vue";
+
 import TheNavigation from "./components/TheNavigation.vue";
 import TheFooter from "./components/TheFooter.vue";
+
+const store = useStore();
+
+onMounted(() => {
+  store.dispatch('auth/listenAuthStateChange');
+})
 </script>
 
 <style scoped>
