@@ -63,6 +63,14 @@ button {
   padding: 16px 12px;
 }
 
+button {
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #4a422c;
+}
+
 input {
   border-radius: 8px 0px 0px 8px;
   font-family: "SFR-regular";

@@ -36,6 +36,7 @@
   font-size: clamp(8rem, 10vw, 17rem);
   font-weight: 400;
 }
+
 button {
   background: #fde4c3;
   color: #302a18;
@@ -44,5 +45,10 @@ button {
   font-size: 1.6rem;
   font-family: "SFR-medium";
   text-transform: uppercase;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #f5d4aa;
 }
 </style>

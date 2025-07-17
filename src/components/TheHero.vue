@@ -106,7 +106,15 @@ h1 {
   position: absolute;
   top: -80px;
   right: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
+
+.button-circle:hover {
+  transform: translateY(-10px);
+}
+
+
 
 .button-circle p {
   margin-top: 30px;
