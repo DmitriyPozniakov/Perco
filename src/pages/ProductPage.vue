@@ -15,14 +15,16 @@
       </span>
       <span v-else>
         <router-link
-        class="breadcrumb-name mobile-bread"
-        :to="`/category/${product.category.replace(/\s+/g, '-')}`"
+          class="breadcrumb-name mobile-bread"
+          :to="`/category/${product.category.replace(/\s+/g, '-')}`"
         >
-        <img class="arrow" src="@/assets/images/arrow-left.svg" alt="">
+          <img class="arrow" src="@/assets/images/arrow-left.svg" alt="" />
           {{ product.category }}
         </router-link>
       </span>
-      <base-button class="sticky-bottom-button">ADD TO CART</base-button>
+      <base-button class="sticky-bottom-button" @click="addToCart"
+        >ADD TO CART</base-button
+      >
     </div>
 
     <div class="images-wrapper">
@@ -74,6 +76,7 @@
     </div>
 
     <may-like :type="type"></may-like>
+    <cart-popup :product="product" />
   </section>
 </template>
 
@@ -83,6 +86,7 @@ import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import placeholder from "@/assets/images/placeholder.svg";
 import MayLike from "@/components/MayLike.vue";
+import CartPopup from "@/components/CartPopup.vue";
 
 const route = useRoute();
 const store = useStore();
@@ -101,6 +105,7 @@ watch(
 );
 
 const product = computed(() => store.getters["products/productById"]);
+console.log(product)
 const isLoading = computed(() => store.getters["products/isLoading"]);
 const type = computed(() => product.value?.type || null);
 
@@ -130,6 +135,51 @@ const updateWidth = () => {
 onMounted(() => {
   window.addEventListener("resize", updateWidth);
 });
+
+const addToCart = async () => {
+  if (!product.value) return;
+
+  const currentCart = store.state.cart.cartItems;
+  const existingItem = currentCart.find(
+    (item) => item.productId === product.value.id
+  );
+
+  const image =
+    Array.isArray(product.value.images) && product.value.images.length > 0
+      ? product.value.images[0]
+      : "";
+
+  const updatedItem = existingItem
+    ? {
+        ...existingItem,
+        quantity: existingItem.quantity + 1,
+        totalPrice: (existingItem.quantity + 1) * product.value.price,
+      }
+    : {
+        productId: product.value.id,
+        name: product.value.name,
+        price: product.value.price,
+        quantity: 1,
+        totalPrice: product.value.price,
+        image,
+      };
+
+  const updatedCart = existingItem
+    ? currentCart.map((item) =>
+        item.productId === product.value.id ? updatedItem : item
+      )
+    : [...currentCart, updatedItem];
+
+  // Обновляем Vuex и синхронизируем с бэком
+  store.dispatch("cart/setCartItems", updatedCart);
+
+  try {
+    await store.dispatch("cart/updateCart");
+    console.log("Товар добавлен в корзину", updatedCart);
+  } catch (error) {
+    console.error("Ошибка при добавлении в корзину:", error.message);
+  }
+};
 </script>
 
 <style scoped>
@@ -180,8 +230,6 @@ img {
   width: 20px;
 }
 
-
-
 .info-container {
   display: flex;
   justify-content: space-between;
@@ -228,8 +276,10 @@ img {
   top: 50%;
   transform: translateY(-50%);
   background: rgba(48, 42, 24, 0.7);
+  /* background: #fff; */
   border: none;
   color: #fff;
+  /* color: #000; */
   font-size: 3rem;
   width: 3.5rem;
   height: 3.5rem;

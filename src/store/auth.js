@@ -1,5 +1,6 @@
 import { auth } from "@/firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously } from "firebase/auth";
+import { sendUserIdToBackend } from "@/helper/sendUserId";
 
 export default {
     namespaced: true,
@@ -26,6 +27,10 @@ export default {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 commit('SET_USER', userCredential.user);
+
+                // Отправляем UID на backend
+                await sendUserIdToBackend(userCredential.user.uid);
+                
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {
@@ -38,6 +43,10 @@ export default {
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 commit('SET_USER', userCredential.user);
+
+                // Отправляем UID на backend
+                await sendUserIdToBackend(userCredential.user.uid);
+
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {

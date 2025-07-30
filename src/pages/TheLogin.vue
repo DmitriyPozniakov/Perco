@@ -46,51 +46,56 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
-import { useStore } from 'vuex';
+import { ref, computed, watch } from "vue";
+import { useStore } from "vuex";
 
 const store = useStore();
 
-const email = ref('');
-const password = ref('');
+const email = ref("");
+const password = ref("");
 
-const loading = computed(() => store.getters['auth/isLoading']);
-const error = computed(() => store.getters['auth/authError']);
+const loading = computed(() => store.getters["auth/isLoading"]);
+const error = computed(() => store.getters["auth/authError"]);
 
 async function handleLogin() {
-  await store.dispatch('auth/signIn', { email: email.value, password: password.value });
-  if (!store.getters['auth/authError']) {
-    alert('Logged in successfully!');
+  await store.dispatch("auth/signIn", {
+    email: email.value,
+    password: password.value,
+  });
+  if (!store.getters["auth/authError"]) {
+    alert("Logged in successfully!");
   }
 }
 
 async function handleGuest() {
-  await store.dispatch('auth/signInAnon');
-  if (!store.getters['auth/authError']) {
-    alert('Logged in as guest!');
+  const user = await store.dispatch("auth/signInAnon");
+  if (user && !store.getters["auth/authError"]) {
+    sessionStorage.setItem("isGuest", "true");
+    alert("Logged in as guest!");
   }
 }
 
 async function handleSignUp() {
   if (!email.value || !password.value) {
-    alert('Enter email and password for sign up');
+    alert("Enter email and password for sign up");
     return;
   }
-  await store.dispatch('auth/signUp', { email: email.value, password: password.value });
-  if (!store.getters['auth/authError']) {
-    alert('Registered successfully!');
+  await store.dispatch("auth/signUp", {
+    email: email.value,
+    password: password.value,
+  });
+  if (!store.getters["auth/authError"]) {
+    alert("Registered successfully!");
   }
 }
 
-const uid = computed(() => store.getters['auth/currentUserUid']);
+const uid = computed(() => store.getters["auth/currentUserUid"]);
 
 watch(uid, (newUid) => {
   if (newUid) {
-    console.log('User UID:', newUid);
+    console.log("User UID:", newUid);
   }
 });
-
-
 </script>
 
 <style scoped>

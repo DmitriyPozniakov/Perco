@@ -10,7 +10,7 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { onMounted } from "vue";
+import { onMounted, watch } from "vue";
 
 import TheNavigation from "./components/TheNavigation.vue";
 import TheFooter from "./components/TheFooter.vue";
@@ -19,8 +19,20 @@ const store = useStore();
 
 onMounted(() => {
   store.dispatch('auth/listenAuthStateChange');
-})
+});
+
+// Следим за появлением user после авторизации
+watch(
+  () => store.state.auth.user,
+  (newUser) => {
+    if (newUser?.uid) {
+      store.dispatch('cart/fetchCart');
+    }
+  },
+  { immediate: true } // на случай если user уже есть
+);
 </script>
+
 
 <style scoped>
 html,
