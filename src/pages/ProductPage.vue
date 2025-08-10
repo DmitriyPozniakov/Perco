@@ -76,7 +76,7 @@
     </div>
 
     <may-like :type="type"></may-like>
-    <cart-popup :product="product" />
+    <cart-popup v-if="showCartPopup" :product="product" />
   </section>
 </template>
 
@@ -104,8 +104,10 @@ watch(
   }
 );
 
+const showCartPopup = ref(false);
+
 const product = computed(() => store.getters["products/productById"]);
-console.log(product)
+console.log(product);
 const isLoading = computed(() => store.getters["products/isLoading"]);
 const type = computed(() => product.value?.type || null);
 
@@ -173,6 +175,9 @@ const addToCart = async () => {
   // Обновляем Vuex и синхронизируем с бэком
   store.dispatch("cart/setCartItems", updatedCart);
 
+  // Показать попап
+  showCartPopup.value = true;
+
   try {
     await store.dispatch("cart/updateCart");
     console.log("Товар добавлен в корзину", updatedCart);
@@ -185,6 +190,7 @@ const addToCart = async () => {
 <style scoped>
 section {
   padding: 125px 40px 40px 40px;
+  position: relative;
 }
 
 .breadcrumbs-container {

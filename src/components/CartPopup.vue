@@ -1,23 +1,44 @@
 <template>
-  <div class="mobile-view">
+  <div v-if="isMobile" class="mobile-view">
     <img :src="product.images[0]" alt="" />
     <div class="about-product">
       <p class="product-name">{{ product.name }}</p>
       <p class="product-price">${{ product.price * quantity }}</p>
       <div class="quantity-controls">
-        <button class="change-quantity" @click="decrease" :disabled="quantity === 1">-</button>
+        <button
+          class="change-quantity"
+          @click="decrease"
+          :disabled="quantity === 1"
+        >
+          -
+        </button>
         <span>{{ quantity }}</span>
         <button class="change-quantity" @click="increase">+</button>
       </div>
     </div>
   </div>
-  <div class="desktop-view">
-    <!-- опционально -->
+  <div v-else class="desktop-view">
+    <img :src="product.images[0]" alt="" />
+    <div class="about-product">
+      <p class="product-name">{{ product.name }}</p>
+      <p class="product-price">${{ product.price * quantity }}</p>
+      <div class="quantity-controls">
+        <button
+          class="change-quantity"
+          @click="decrease"
+          :disabled="quantity === 1"
+        >
+          -
+        </button>
+        <span>{{ quantity }}</span>
+        <button class="change-quantity" @click="increase">+</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, computed } from "vue";
+import { defineProps, computed, ref, onMounted, onUnmounted } from "vue";
 import { useStore } from "vuex";
 
 const props = defineProps({
@@ -25,6 +46,20 @@ const props = defineProps({
 });
 
 const store = useStore();
+
+const isMobile = ref(window.innerWidth <= 768);
+
+const checkScreen = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", checkScreen);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", checkScreen);
+});
 
 // Получаем текущий товар из корзины
 const quantity = computed(() => {
@@ -61,7 +96,7 @@ const decrease = async () => {
 
 <style scoped>
 .mobile-view {
-  width: 100%;
+  width: 90%;
   padding: 15px;
   display: flex;
   gap: 15px;
@@ -69,8 +104,25 @@ const decrease = async () => {
   border: 0.5px solid #302a18;
   border-radius: 30px;
   background: #fff;
+  position: absolute;
+  top: 30px;
 }
-img {
+.desktop-view {
+  padding: 20px;
+  display: flex;
+  border-radius: 8px;
+  background: #fff;
+  max-width: 41rem;
+  gap: 10px;
+
+}
+.desktop-view img {
+  object-fit: contain;
+  height: 16rem;
+  background: #e7e7e7;
+  border-radius: 20px;
+}
+.mobile-view img {
   object-fit: contain;
   width: 12rem;
   background: #e7e7e7;

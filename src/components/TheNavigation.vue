@@ -9,7 +9,9 @@
       <router-link to="/login">
         <img src="@/assets/images/user.svg" alt="" />
       </router-link>
-      <img src="@/assets/images/bag.svg" alt="" />
+      <router-link :to="`/bag/${userId}`">
+        <img src="@/assets/images/bag.svg" alt="" />
+      </router-link>
     </div>
 
     <!-- MOBILE SLIDE MENU -->
@@ -59,26 +61,31 @@
       </div>
       <div class="user-info">
         <div class="bag-wraper">
-          <img src="@/assets/images/user.svg" alt="account">
+          <img src="@/assets/images/user.svg" alt="account" />
           <router-link to="/login" class="account">Account</router-link>
         </div>
-        <div class="bag-wraper">
-          <img src="@/assets/images/bag.svg" alt="bag" />
-          <a href="#">Bag</a>
-        </div>
+        <router-link class="bag-wraper" :to="`/bag/${userId}`">
+            <img src="@/assets/images/bag.svg" alt="bag" />
+            <a href="#">Bag</a>
+          </router-link>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
 
 const isMenuOpen = ref(false);
+const store = useStore();
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
+
+// Получаем UID пользователя
+const userId = computed(() => store.state.auth.user?.uid || null);
 </script>
 
 <style scoped>

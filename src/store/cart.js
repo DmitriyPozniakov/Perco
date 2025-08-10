@@ -18,6 +18,7 @@ export default {
     },
     actions: {
         async fetchCart({ commit, rootState }) {
+            commit('SET_LOADING', true)
             try {
                 const userId = rootState.auth.user?.uid;
                 if (!userId) throw new Error('User ID is missing');
@@ -29,6 +30,8 @@ export default {
                 commit('SET_CART_ITEMS', data.cart);
             } catch (error) {
                 console.error('Ошибка при загрузке корзины:', error.message);
+            } finally {
+                commit('SET_LOADING', false)
             }
         },
 
@@ -129,6 +132,7 @@ export default {
         },
         cartTotalQuantity(state) {
             return state.cartItems.reduce((sum, item) => sum + item.quantity, 0)
-        }
+        },
+        isLoading: (state) => state.loading,
     }
 }

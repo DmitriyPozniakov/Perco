@@ -12,7 +12,9 @@
         <button class="add-to-cart">Add to cart</button>
       </div>
     </div>
-    <base-discount v-if="product.discount">{{ product.discount }}%</base-discount>
+    <base-discount v-if="product.discount"
+      >{{ product.discount }}%</base-discount
+    >
   </router-link>
 </template>
 
@@ -70,27 +72,35 @@ defineProps({
 }
 
 .price-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .old-price {
-    color: #ea4335;
-    font-family: "SFR-regular";
-    font-size: 1.8rem;
-    text-decoration-line: line-through;
-    opacity: 0.7;
+  color: #ea4335;
+  font-family: "SFR-regular";
+  font-size: 1.8rem;
+  text-decoration-line: line-through;
+  opacity: 0.7;
 }
 
 .add-to-cart {
-    background: transparent;
-    color: #302a18;
-    font-size: 1.4rem;
-    font-family: "SFR-bold";
-    font-weight: 700;
-    text-decoration-line: underline;
-    text-transform: uppercase;
+  background: transparent;
+  color: #302a18;
+  font-size: 1.4rem;
+  font-family: "SFR-bold";
+  font-weight: 700;
+  text-decoration-line: underline;
+  text-transform: uppercase;
+}
+
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: translateY(-5px);
 }
 </style>
 

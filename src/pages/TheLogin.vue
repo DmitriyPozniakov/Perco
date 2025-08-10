@@ -48,8 +48,10 @@
 <script setup>
 import { ref, computed, watch } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";  // Импортируем роутер
 
 const store = useStore();
+const router = useRouter(); // Создаём объект роутера
 
 const email = ref("");
 const password = ref("");
@@ -64,6 +66,7 @@ async function handleLogin() {
   });
   if (!store.getters["auth/authError"]) {
     alert("Logged in successfully!");
+    router.push("/account");  // Перенаправляем
   }
 }
 
@@ -72,6 +75,7 @@ async function handleGuest() {
   if (user && !store.getters["auth/authError"]) {
     sessionStorage.setItem("isGuest", "true");
     alert("Logged in as guest!");
+    router.push("/account");  // Перенаправляем
   }
 }
 
@@ -86,6 +90,7 @@ async function handleSignUp() {
   });
   if (!store.getters["auth/authError"]) {
     alert("Registered successfully!");
+    router.push("/account");  // Перенаправляем
   }
 }
 
@@ -97,6 +102,7 @@ watch(uid, (newUid) => {
   }
 });
 </script>
+
 
 <style scoped>
 .login-section {
