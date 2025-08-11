@@ -6,6 +6,10 @@ import TheLogin from '@/pages/TheLogin.vue';
 import ProductPage from '@/pages/ProductPage.vue';
 import TheBag from '@/pages/TheBag.vue';
 import TheAccount from '@/pages/TheAccount.vue';
+import AccountAddress from '@/pages/AccountAddress.vue';
+import AccountHelp from '@/pages/AccountHelp.vue';
+import AccountOrders from '@/pages/AccountOrders.vue';
+import AccountReturn from '@/pages/AccountReturn.vue';
 import NotFound from '@/pages/NotFound.vue';
 
 const routes = [
@@ -18,7 +22,25 @@ const routes = [
         path: '/account',
         name: 'account',
         component: TheAccount,
-        meta: { requiresAuth: true } // флаг, что нужна авторизация
+        meta: { requiresAuth: true }, // флаг, что нужна авторизация
+        children: [
+            {
+                path: 'orders',
+                component: AccountOrders
+            },
+            {
+                path: 'address',
+                component: AccountAddress
+            },
+            {
+                path: 'returns',
+                component: AccountReturn
+            },
+            {
+                path: 'help',
+                component: AccountHelp
+            }
+        ]
     },
     { path: '/:catchAll(.*)', name: 'notFound', component: NotFound },
 ]

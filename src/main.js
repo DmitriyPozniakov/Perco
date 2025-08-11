@@ -11,6 +11,7 @@ import baseDiscount from './base/baseDiscount.vue'
 import baseButton from './base/baseButton.vue'
 import BaseAccordion from './base/BaseAccordion.vue'
 import baseInput from './base/baseInput.vue'
+import AccountBanner from './base/AccountBanner.vue'
 
 const app = createApp(App)
 
@@ -24,6 +25,7 @@ app.component('base-discount', baseDiscount)
 app.component('base-button', baseButton)
 app.component('base-accordion', BaseAccordion)
 app.component('base-input', baseInput);
+app.component('account-banner', AccountBanner)
 
 app.mount('#app')
 
