@@ -13,7 +13,7 @@ button {
   color: #fff;
   font-family: "SFR-regular";
   font-weight: 400;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
   transition: background 0.3s ease;
 }
 

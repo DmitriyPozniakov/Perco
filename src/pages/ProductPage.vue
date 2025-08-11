@@ -76,7 +76,7 @@
     </div>
 
     <may-like :type="type"></may-like>
-    <cart-popup v-if="showCartPopup" :product="product" />
+    <cart-popup v-if="showCartPopup" :product="product"  @close="showCartPopup = false" />
   </section>
 </template>
 

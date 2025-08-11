@@ -1,49 +1,70 @@
 <template>
-  <div v-if="isMobile" class="mobile-view">
-    <img :src="product.images[0]" alt="" />
-    <div class="about-product">
-      <p class="product-name">{{ product.name }}</p>
-      <p class="product-price">${{ product.price * quantity }}</p>
-      <div class="quantity-controls">
-        <button
-          class="change-quantity"
-          @click="decrease"
-          :disabled="quantity === 1"
-        >
-          -
-        </button>
-        <span>{{ quantity }}</span>
-        <button class="change-quantity" @click="increase">+</button>
+  <div class="overlay" @click="closePopup">
+    <div v-if="isMobile" @click.stop class="mobile-view">
+      <img :src="product.images[0]" alt="" />
+      <div class="about-product">
+        <p class="product-name">{{ product.name }}</p>
+        <p class="product-price">${{ product.price * quantity }}</p>
+        <div class="quantity-controls">
+          <button
+            class="change-quantity"
+            @click="decrease"
+            :disabled="quantity === 1"
+          >
+            -
+          </button>
+          <span>{{ quantity }}</span>
+          <button class="change-quantity" @click="increase">+</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div v-else class="desktop-view">
-    <img :src="product.images[0]" alt="" />
-    <div class="about-product">
-      <p class="product-name">{{ product.name }}</p>
-      <p class="product-price">${{ product.price * quantity }}</p>
-      <div class="quantity-controls">
-        <button
-          class="change-quantity"
-          @click="decrease"
-          :disabled="quantity === 1"
-        >
-          -
-        </button>
-        <span>{{ quantity }}</span>
-        <button class="change-quantity" @click="increase">+</button>
+    <div v-else @click.stop class="desktop-view">
+      <div class="container">
+        <img :src="product.images[0]" alt="" />
+        <div class="about-product">
+          <p class="product-name">{{ product.name }}</p>
+          <p class="product-price">${{ product.price * quantity }}</p>
+          <div class="quantity-controls">
+            <button
+              class="change-quantity"
+              @click="decrease"
+              :disabled="quantity === 1"
+            >
+              -
+            </button>
+            <span>{{ quantity }}</span>
+            <button class="change-quantity" @click="increase">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <base-button>GO TO CHECKOUT</base-button>
+        <button class="shopping-btn" @click="closePopup">CONTINUE SHOPPING</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, computed, ref, onMounted, onUnmounted } from "vue";
+import {
+  defineProps,
+  defineEmits,
+  computed,
+  ref,
+  onMounted,
+  onUnmounted,
+} from "vue";
 import { useStore } from "vuex";
 
 const props = defineProps({
   product: Object,
 });
+
+const emit = defineEmits(["close"]);
+
+const closePopup = () => {
+  emit("close");
+};
 
 const store = useStore();
 
@@ -55,10 +76,12 @@ const checkScreen = () => {
 
 onMounted(() => {
   window.addEventListener("resize", checkScreen);
+  document.body.style.overflow = "hidden";
 });
 
 onUnmounted(() => {
   window.removeEventListener("resize", checkScreen);
+  document.body.style.overflow = "";
 });
 
 // Получаем текущий товар из корзины
@@ -95,6 +118,17 @@ const decrease = async () => {
 </script>
 
 <style scoped>
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 999;
+  backdrop-filter: blur(2px);
+  padding: 0 40px;
+}
 .mobile-view {
   width: 90%;
   padding: 15px;
@@ -107,26 +141,36 @@ const decrease = async () => {
   position: absolute;
   top: 30px;
 }
+.container {
+  display: flex;
+  gap: 15px;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .desktop-view {
   padding: 20px;
-  display: flex;
   border-radius: 8px;
   background: #fff;
-  max-width: 41rem;
+  width: 41rem;
   gap: 10px;
-
+  position: absolute;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 .desktop-view img {
   object-fit: contain;
   height: 16rem;
   background: #e7e7e7;
-  border-radius: 20px;
 }
 .mobile-view img {
   object-fit: contain;
   width: 12rem;
   background: #e7e7e7;
-  border-radius: 20px;
 }
 .about-product {
   display: flex;
@@ -162,5 +206,25 @@ const decrease = async () => {
   height: 30px;
   width: 30px;
   font-family: "SFR-regular";
+}
+
+.shopping-btn {
+  border-radius: 8px;
+  background: #fff;
+  border-radius: 8px;
+  border: 0.675px solid #302a18;
+  color: #302a18;
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+  text-transform: uppercase;
+  font-family: 'SFR-medium';
+  height: 5rem;
+  padding: 13px 34px;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 0;
+    justify-content: center;
+  }
 }
 </style>
