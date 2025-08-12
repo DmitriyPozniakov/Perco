@@ -60,10 +60,10 @@
         </div>
       </div>
       <div class="user-info">
-        <div class="bag-wraper">
+        <router-link  to="/login" class="bag-wraper">
           <img src="@/assets/images/user.svg" alt="account" />
-          <router-link to="/login" class="account">Account</router-link>
-        </div>
+          <a href="#" class="account">Account</a>
+        </router-link>
         <router-link class="bag-wraper" :to="`/bag/${userId}`">
             <img src="@/assets/images/bag.svg" alt="bag" />
             <a href="#">Bag</a>

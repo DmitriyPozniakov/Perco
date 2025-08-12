@@ -64,7 +64,7 @@ aside {
   gap: 51px;
   background: #fff;
   height: 100vh;
-  max-height: 60rem;
+  max-height: 100rem;
 }
 
 nav {
@@ -83,9 +83,42 @@ nav {
   text-transform: uppercase;
 }
 
+.router-link-active {
+  opacity: 1;
+  font-weight: 700;
+}
+
 .content {
   flex: 1;
   background: #f6f6f6;
   padding-bottom: 20px;
 }
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    padding: 12px 20px;
+    gap: 20px;
+  }
+
+  nav {
+    gap: 12px;
+    padding-top: 12px;
+  }
+
+  .email {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+  }
+
+  .content {
+    padding: 15px 20px;
+  }
+}
+
 </style>

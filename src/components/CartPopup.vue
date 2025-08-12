@@ -1,7 +1,7 @@
 <template>
   <div class="overlay" @click="closePopup">
     <div v-if="isMobile" @click.stop class="mobile-view">
-      <img :src="product.images[0]" alt="" />
+      <img class="product-image" :src="product.images[0]" alt="" />
       <div class="about-product">
         <p class="product-name">{{ product.name }}</p>
         <p class="product-price">${{ product.price * quantity }}</p>
@@ -20,7 +20,7 @@
     </div>
     <div v-else @click.stop class="desktop-view">
       <div class="container">
-        <img :src="product.images[0]" alt="" />
+        <img class="product-image" :src="product.images[0]" alt="" />
         <div class="about-product">
           <p class="product-name">{{ product.name }}</p>
           <p class="product-price">${{ product.price * quantity }}</p>
@@ -38,8 +38,17 @@
         </div>
       </div>
       <div class="buttons">
-        <base-button>GO TO CHECKOUT</base-button>
+        <base-button @click="checkout">GO TO CHECKOUT</base-button>
         <button class="shopping-btn" @click="closePopup">CONTINUE SHOPPING</button>
+      </div>
+      <div class="payments">
+        <p class="payment-text">Payment with</p>
+        <div class="payment-methods">
+          <img class="image-pay-method" src="@/assets/images/applePay.svg" alt="">
+          <img class="image-pay-method" src="@/assets/images/googlePay.svg" alt="">
+          <img class="image-pay-method" src="@/assets/images/visa.svg" alt="">
+          <img class="image-pay-method" src="@/assets/images/mastercard.svg" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -55,6 +64,7 @@ import {
   onUnmounted,
 } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   product: Object,
@@ -83,6 +93,12 @@ onUnmounted(() => {
   window.removeEventListener("resize", checkScreen);
   document.body.style.overflow = "";
 });
+
+const router = useRouter();
+
+const checkout = () => {
+  router.push({name: 'shoppingBag'})
+}
 
 // Получаем текущий товар из корзины
 const quantity = computed(() => {
@@ -162,12 +178,13 @@ const decrease = async () => {
   flex-direction: column;
   gap: 30px;
 }
-.desktop-view img {
+.desktop-view .product-image {
   object-fit: contain;
+  width: 16rem;
   height: 16rem;
   background: #e7e7e7;
 }
-.mobile-view img {
+.mobile-view .product-image {
   object-fit: contain;
   width: 12rem;
   background: #e7e7e7;
@@ -219,6 +236,25 @@ const decrease = async () => {
   font-family: 'SFR-medium';
   height: 5rem;
   padding: 13px 34px;
+}
+
+.payments {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.payment-methods {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.payment-text {
+  color: #302a18;
+  font-size: 1.2rem;
+  font-family: 'SFR-regular';
+  font-weight: 400;
 }
 
 @media (max-width: 768px) {

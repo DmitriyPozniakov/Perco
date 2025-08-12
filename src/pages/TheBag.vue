@@ -55,7 +55,7 @@
             <p>{{ totalPrice }}$</p>
           </div>
         </div>
-        <button class="checkout-btn">Place order</button>
+        <base-button class="checkout-btn">Place order</base-button>
       </div>
     </div>
   </section>
@@ -136,19 +136,8 @@ section {
   top: 20px;
 }
 
-.card-body {
-  
-}
-
 .checkout-btn {
   width: 100%;
-  padding: 12px;
-  background: #302a18;
-  color: #fff;
-  font-size: 1.4rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 .card-total {
