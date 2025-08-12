@@ -24,8 +24,13 @@
       </div>
     </div>
     <div class="buttons-container">
-      <base-button class="edit">EDIT</base-button>
-      <button @click="deleteAddress" class="delete-btn">DELETE</button>
+      <base-button class="edit">
+      <img src="@/assets/images/edit.svg" alt="">
+      EDIT
+    </base-button>
+      <button @click="deleteAddress" class="delete-btn">
+        <img src="@/assets/images/trash.svg" alt="">
+        DELETE</button>
     </div>
   </div>
 </template>
@@ -75,6 +80,10 @@ const deleteAddress = () => {
 }
 .edit {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 .delete-btn {
   width: 100%;
@@ -84,6 +93,10 @@ const deleteAddress = () => {
   background: #fff;
   color: #ea4335;
   transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .delete-btn:hover,
@@ -91,6 +104,12 @@ const deleteAddress = () => {
   background: #ea4335;
   color: #fff;
 }
+
+.delete-btn:hover img,
+.delete-btn:active img {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(180deg) brightness(103%) contrast(103%);
+}
+
 
 .buttons-container {
   display: flex;
