@@ -1,31 +1,50 @@
 <template>
   <div class="address-card">
-    <div class="row">
+    <div class="row row-fullname">
       <img src="@/assets/images/user.svg" alt="" />
       <p>{{ fullName }}</p>
     </div>
-    <div class="row">
+    <div class="row row-phone">
       <img src="@/assets/images/call.svg" alt="" />
       <p>{{ phone }}</p>
     </div>
-    <div class="row">
+    <div class="row row-address">
       <img src="@/assets/images/location.svg" alt="" />
       <p>{{ address }}</p>
     </div>
+    <hr />
+    <div class="billing-container">
+      <div class="pay-address shop-address">
+        <img src="@/assets/images/tick-circle.svg" alt="" />
+        Shipping address
+      </div>
+      <div class="pay-address bill-address">
+        <img src="@/assets/images/tick-circle.svg" alt="" />
+        Billing address
+      </div>
+    </div>
     <div class="buttons-container">
       <base-button class="edit">EDIT</base-button>
-      <button class="delete-btn">DELETE</button>
+      <button @click="deleteAddress" class="delete-btn">DELETE</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import {defineProps} from 'vue';
-defineProps({
-    fullName: String,
-    phone: String,
-    address: String
-})
+import { defineProps, defineEmits } from "vue";
+
+const props = defineProps({
+  id: String,
+  fullName: String,
+  phone: String,
+  address: String,
+});
+
+const emit = defineEmits(['delete-address']);
+
+const deleteAddress = () => {
+  emit('delete-address', props.id)
+}
 </script>
 
 <style scoped>
@@ -36,7 +55,7 @@ defineProps({
   gap: 20px;
   background: #fff;
   border-radius: 8px;
-  height: 43rem;
+  height: 40rem;
   max-width: 32rem;
   min-width: 30rem;
 }
@@ -55,7 +74,7 @@ defineProps({
   font-weight: 300;
 }
 .edit {
-    width: 100%;
+  width: 100%;
 }
 .delete-btn {
   width: 100%;
@@ -63,6 +82,35 @@ defineProps({
   border-radius: 8px;
   border: 0.675px solid #ea4335;
   background: #fff;
-  color:#ea4335
+  color: #ea4335;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.delete-btn:hover,
+.delete-btn:active {
+  background: #ea4335;
+  color: #fff;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.billing-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pay-address {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #302a18;
+  font-family: "SFR-regular";
+  font-weight: 300;
+  font-size: 1.6rem;
 }
 </style>

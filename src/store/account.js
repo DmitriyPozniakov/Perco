@@ -1,9 +1,9 @@
 export default {
     namespaced: true,
     state: () => ({
-        address: null,
+        address: [],
         error: null,
-        loading: false,
+        loading: true,
     }),
     mutations: {
         SET_ADDRESS(state, address) {
@@ -26,7 +26,8 @@ export default {
                     throw new Error(`Ошибка сервера: ${res.status}`);
                 }
                 const data = await res.json();
-                commit('SET_ADDRESS', data);
+                console.log('fetchAddress received data:', data.addresses);
+                commit('SET_ADDRESS', data.addresses);
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {
@@ -48,7 +49,26 @@ export default {
                     throw new Error(`Ошибка сервера: ${res.status}`);
                 }
                 const data = await res.json();
-                commit('SET_ADDRESS', data);
+                commit('SET_ADDRESS', data.addresses || data);
+            } catch (error) {
+                commit('SET_ERROR', error.message);
+            } finally {
+                commit('SET_LOADING', false);
+            }
+        },
+        async deleteAddress({ commit }, { userId, addressId }) {
+            commit('SET_LOADING', true);
+            commit('SET_ERROR', null);
+            try {
+                const res = await fetch(
+                    `${process.env.VUE_APP_URL}/users/${userId}/address/${addressId}`,
+                    { method: 'DELETE' }
+                );
+                if (!res.ok) {
+                    throw new Error(`Ошибка сервера: ${res.status}`);
+                }
+                const data = await res.json();
+                commit('SET_ADDRESS', data.addresses);
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {
