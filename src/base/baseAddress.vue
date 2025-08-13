@@ -24,13 +24,14 @@
       </div>
     </div>
     <div class="buttons-container">
-      <base-button class="edit">
-      <img src="@/assets/images/edit.svg" alt="">
-      EDIT
-    </base-button>
+      <base-button @click="editAddress" class="edit">
+        <img src="@/assets/images/edit.svg" alt="" />
+        EDIT
+      </base-button>
       <button @click="deleteAddress" class="delete-btn">
-        <img src="@/assets/images/trash.svg" alt="">
-        DELETE</button>
+        <img src="@/assets/images/trash.svg" alt="" />
+        DELETE
+      </button>
     </div>
   </div>
 </template>
@@ -45,11 +46,20 @@ const props = defineProps({
   address: String,
 });
 
-const emit = defineEmits(['delete-address']);
+const emit = defineEmits(["delete-address"]);
 
 const deleteAddress = () => {
-  emit('delete-address', props.id)
-}
+  emit("delete-address", props.id);
+};
+
+const editAddress = () => {
+  emit("edit-address", {
+    id: props.id,
+    fullName: props.fullName,
+    phone: props.phone,
+    address: props.address,
+  });
+};
 </script>
 
 <style scoped>
@@ -107,9 +117,9 @@ const deleteAddress = () => {
 
 .delete-btn:hover img,
 .delete-btn:active img {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(180deg) brightness(103%) contrast(103%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%)
+    hue-rotate(180deg) brightness(103%) contrast(103%);
 }
-
 
 .buttons-container {
   display: flex;

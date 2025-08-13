@@ -2,9 +2,9 @@
   <account-banner category="your address" />
 
   <section class="loader-section" v-if="loading">
-    <div><base-loader></base-loader></div>
+    <div><base-loader /></div>
   </section>
-  
+
   <section class="address-section" v-else>
     <div class="address">
       <BaseAddress
@@ -15,8 +15,10 @@
         :phone="addr.phone"
         :address="addr.address"
         @delete-address="handleDeleteAddress"
+        @edit-address="handleEditAddress"
       />
     </div>
+
     <button class="add-adress-btn" @click="togglePopup">
       <img src="@/assets/images/add.svg" alt="" />
       <span>add new</span>
@@ -27,10 +29,15 @@
     <form @submit.prevent="submitAddress" class="popup-content">
       <div class="header">
         <h2>Enter your address</h2>
-        <button @click="togglePopup" type="button">X</button>
+        <button @click="cancelEdit" type="button">X</button>
       </div>
 
-      <input type="text" placeholder="Full name" v-model="fullNameInput" required />
+      <input
+        type="text"
+        placeholder="Full name"
+        v-model="fullNameInput"
+        required
+      />
 
       <vue-tel-input
         v-model="phoneInput"
@@ -39,14 +46,20 @@
         required
       />
 
-      <input type="text" placeholder="Address" v-model="addressInput" required />
-      <base-button type="submit">Submit</base-button>
+      <input
+        type="text"
+        placeholder="Address"
+        v-model="addressInput"
+        required
+      />
+
+      <base-button type="submit">{{ editingId ? "Update" : "Submit" }}</base-button>
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted  } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { VueTelInput } from "vue-tel-input";
 import "vue-tel-input/vue-tel-input.css";
 import { useStore } from "vuex";
@@ -59,40 +72,86 @@ const showPopup = ref(false);
 const fullNameInput = ref("");
 const phoneInput = ref("");
 const addressInput = ref("");
+const editingId = ref(null); 
+
+const addresses = computed(() => store.getters["account/address"]);
+const loading = computed(() => store.getters["account/loading"]);
 
 const togglePopup = () => {
   showPopup.value = !showPopup.value;
 };
 
+const resetForm = () => {
+  fullNameInput.value = "";
+  phoneInput.value = "";
+  addressInput.value = "";
+  editingId.value = null;
+};
+
+const cancelEdit = () => {
+  resetForm();
+  togglePopup();
+};
+
 const submitAddress = async () => {
   try {
     const payload = {
-      fullName: fullNameInput.value,
-      phone: phoneInput.value,
-      address: addressInput.value,
+      fullName: fullNameInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      address: addressInput.value.trim(),
     };
 
-    const res = await fetch(
-      `${process.env.VUE_APP_URL}/users/${userId.value}/address`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      }
-    );
+    let res;
+    if (editingId.value) {
+      res = await fetch(
+        `${process.env.VUE_APP_URL}/users/${userId.value}/address/${editingId.value}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+    } else {
+      res = await fetch(
+        `${process.env.VUE_APP_URL}/users/${userId.value}/address`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+    }
 
     if (!res.ok) throw new Error(`Ошибка: ${res.status}`);
 
     await res.json();
     await store.dispatch("account/fetchAddress", userId.value);
 
-    fullNameInput.value = "";
-    phoneInput.value = "";
-    addressInput.value = "";
+    resetForm();
     togglePopup();
   } catch (err) {
     console.error("Ошибка при сохранении адреса:", err);
   }
+};
+
+const handleDeleteAddress = async (addressId) => {
+  try {
+    await store.dispatch("account/deleteAddress", {
+      userId: userId.value,
+      addressId,
+    });
+    await store.dispatch("account/fetchAddress", userId.value);
+  } catch (err) {
+    console.error("Ошибка при удалении адреса:", err);
+  }
+};
+
+const handleEditAddress = (address) => {
+  fullNameInput.value = address.fullName;
+  phoneInput.value = address.phone;
+  addressInput.value = address.address;
+  editingId.value = address._id; 
+  showPopup.value = true;
 };
 
 onMounted(() => {
@@ -100,21 +159,8 @@ onMounted(() => {
     store.dispatch("account/fetchAddress", userId.value);
   }
 });
-
-const handleDeleteAddress = async (addressId) => {
-  try {
-    await store.dispatch("account/deleteAddress", { userId: userId.value, addressId });
-    await store.dispatch("account/fetchAddress", userId.value);
-  } catch (err) {
-    console.error("Ошибка при удалении адреса:", err);
-  }
-};
-
-const addresses = computed(() => store.getters["account/address"]);
-const loading = computed(() => store.getters["account/loading"]);
-
-
 </script>
+
 
 
 <style scoped>

@@ -39,7 +39,7 @@ export default {
             commit('SET_ERROR', null);
             try {
                 const res = await fetch(`${process.env.VUE_APP_URL}/users/${userId}/address`, {
-                    method: 'POST', // или PUT, в зависимости от API
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -50,6 +50,33 @@ export default {
                 }
                 const data = await res.json();
                 commit('SET_ADDRESS', data.addresses || data);
+            } catch (error) {
+                commit('SET_ERROR', error.message);
+            } finally {
+                commit('SET_LOADING', false);
+            }
+        },
+        async editAddress({ commit }, { userId, addressId, updatedData }) {
+            commit('SET_LOADING', true);
+            commit('SET_ERROR', null);
+            try {
+                const res = await fetch(
+                    `${process.env.VUE_APP_URL}/users/${userId}/address/${addressId}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(updatedData),
+                    }
+                );
+
+                if (!res.ok) {
+                    throw new Error(`Ошибка сервера: ${res.status}`);
+                }
+
+                const data = await res.json();
+                commit('SET_ADDRESS', data.addresses);
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {
