@@ -1,5 +1,5 @@
 import { auth } from "@/firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously, signOut } from "firebase/auth";
 import { sendUserIdToBackend } from "@/helper/sendUserId";
 
 export default {
@@ -30,7 +30,7 @@ export default {
 
                 // Отправляем UID на backend
                 await sendUserIdToBackend(userCredential.user.uid);
-                
+
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {
@@ -60,6 +60,20 @@ export default {
                 const userCredential = await signInAnonymously(auth);
                 commit('SET_USER', userCredential.user);
                 return userCredential.user;
+            } catch (error) {
+                commit('SET_ERROR', error.message);
+            } finally {
+                commit('SET_LOADING', false);
+            }
+        },
+        async signOut({ commit }) {
+            commit('SET_LOADING', true);
+            commit('SET_ERROR', null);
+            try {
+                await signOut(auth);
+                commit('SET_USER', null);
+                sessionStorage.clear();
+                localStorage.removeItem("cart"); 
             } catch (error) {
                 commit('SET_ERROR', error.message);
             } finally {

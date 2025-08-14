@@ -10,6 +10,10 @@
         <router-link to="/account/returns">return the item</router-link>
         <router-link to="/account/help">help and contacts</router-link>
       </nav>
+      <button @click="signOut" class="logout-btn">
+        <img src="@/assets/images/logout.svg" alt="" />
+        <span>Log out</span>
+      </button>
     </aside>
 
     <section class="content">
@@ -21,6 +25,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 const userEmail = ref("");
 
@@ -34,6 +40,14 @@ onMounted(() => {
     }
   });
 });
+
+const store = useStore();
+const router = useRouter();
+
+const signOut = async () => {
+  await store.dispatch("auth/signOut");
+  router.push("/login");
+};
 </script>
 
 <style scoped>
@@ -61,6 +75,7 @@ aside {
   padding: 16px 34px;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 51px;
   background: #fff;
   height: 100vh;
@@ -76,7 +91,7 @@ nav {
 
 .email {
   margin-bottom: 60px;
-  font-family: 'SFR-regular';
+  font-family: "SFR-regular";
   font-size: 1.6rem;
   font-weight: 500;
   color: #302a18;
@@ -93,6 +108,20 @@ nav {
   background: #f6f6f6;
   padding-bottom: 20px;
 }
+
+.logout-btn {
+  background: none;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+
+  font-family: "SFR-regular";
+  font-size: 1.6rem;
+  color: #302a18;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
@@ -120,5 +149,4 @@ nav {
     padding: 15px 20px;
   }
 }
-
 </style>

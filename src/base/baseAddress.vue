@@ -74,6 +74,7 @@ const editAddress = () => {
   max-width: 32rem;
   min-width: 30rem;
 }
+
 .row {
   display: flex;
   gap: 12px;

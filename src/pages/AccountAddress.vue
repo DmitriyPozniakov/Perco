@@ -216,6 +216,11 @@ img {
   height: 40rem;
   max-width: 32rem;
   min-width: 30rem;
+  transition: all 0.3s ease;
+}
+
+.add-adress-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .add-adress-btn span {
