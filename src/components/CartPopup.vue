@@ -151,8 +151,7 @@ const decrease = async () => {
   display: flex;
   gap: 15px;
   height: 15rem;
-  border: 0.5px solid #302a18;
-  border-radius: 30px;
+  border-radius: 15px;
   background: #fff;
   position: absolute;
   top: 30px;
@@ -186,7 +185,7 @@ const decrease = async () => {
 }
 .mobile-view .product-image {
   object-fit: contain;
-  width: 12rem;
+  width: 10rem;
   background: #e7e7e7;
 }
 .about-product {
