@@ -9,7 +9,7 @@ button {
   border-radius: 8px;
   background: #302a18;
   height: 5rem;
-  padding: 13px 34px;
+  padding: 16px 32px;
   color: #fff;
   font-family: "SFR-regular";
   font-weight: 400;

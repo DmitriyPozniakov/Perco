@@ -124,6 +124,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 .final-card {
@@ -134,6 +135,7 @@ section {
   height: fit-content;
   position: sticky;
   top: 20px;
+  width: 100%;
 }
 
 .checkout-btn {
@@ -155,6 +157,7 @@ section {
   display: flex;
   align-items: flex-start;
   gap: 24px;
+  width: 100%;
 }
 
 .img-box {
@@ -184,26 +187,31 @@ section {
 .product-info-bottom {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .name,
 .price {
   color: #302a18;
   font-family: "SFR-bold";
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.2rem);
   font-weight: 500;
   text-transform: uppercase;
 }
 
 .delete-btn {
   align-self: flex-start;
-  padding: 6px 12px;
+  padding: 6px;
   color: #e74c3c;
   cursor: pointer;
   font-size: 1.6rem;
   font-family: "SFR-regular";
   background: transparent;
   border: none;
+}
+
+.delete-btn:hover {
+  text-decoration: underline #e74c3c;
 }
 
 .quantity-controls {
@@ -224,5 +232,50 @@ section {
   height: 30px;
   width: 30px;
   font-family: "SFR-regular";
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .img-box {
+    width: 11rem;
+  }
+}
+
+@media (max-width: 530px) {
+  .product {
+    flex-direction: column; /* колонки станут сверху вниз */
+    align-items: flex-start;
+  }
+
+  .img-box {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+
+  .img-box img {
+    width: 100%;
+    height: auto;
+    max-height: 20rem;
+    object-fit: cover;
+  }
+
+  .product-info-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-info-top,
+  .product-info-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-info-top {
+    margin-bottom: 30px;
+  }
 }
 </style>

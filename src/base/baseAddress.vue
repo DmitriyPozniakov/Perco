@@ -98,7 +98,7 @@ const editAddress = () => {
 }
 .delete-btn {
   width: 100%;
-  padding: 20px;
+  padding: 16px 32px;
   border-radius: 8px;
   border: 0.675px solid #ea4335;
   background: #fff;

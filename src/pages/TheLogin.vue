@@ -28,14 +28,6 @@
         <button class="login-button" :disabled="loading" type="submit">
           {{ loading ? "Logging in..." : "Log in" }}
         </button>
-        <button
-          class="guest-button"
-          type="button"
-          :disabled="loading"
-          @click="handleGuest"
-        >
-          Continue as a guest
-        </button>
         <a href="#" class="without-acc" @click.prevent="handleSignUp">
           Don’t have an account? Sign up
         </a>
@@ -66,15 +58,6 @@ async function handleLogin() {
   });
   if (!store.getters["auth/authError"]) {
     alert("Logged in successfully!");
-    router.push("/account");  // Перенаправляем
-  }
-}
-
-async function handleGuest() {
-  const user = await store.dispatch("auth/signInAnon");
-  if (user && !store.getters["auth/authError"]) {
-    sessionStorage.setItem("isGuest", "true");
-    alert("Logged in as guest!");
     router.push("/account");  // Перенаправляем
   }
 }
@@ -135,7 +118,7 @@ form {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 40px;
 }
 
 .form-logo {
